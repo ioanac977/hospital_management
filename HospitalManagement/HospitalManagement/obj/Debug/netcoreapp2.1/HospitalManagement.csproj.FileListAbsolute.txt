@@ -1,0 +1,14 @@
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\bin\Debug\netcoreapp2.1\HospitalManagement.deps.json
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\bin\Debug\netcoreapp2.1\HospitalManagement.runtimeconfig.json
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\bin\Debug\netcoreapp2.1\HospitalManagement.runtimeconfig.dev.json
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\bin\Debug\netcoreapp2.1\HospitalManagement.dll
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\bin\Debug\netcoreapp2.1\HospitalManagement.pdb
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.csprojAssemblyReference.cache
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.csproj.CoreCompileInputs.cache
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.RazorAssemblyInfo.cache
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.RazorAssemblyInfo.cs
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.AssemblyInfoInputs.cache
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.AssemblyInfo.cs
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.RazorTargetAssemblyInfo.cache
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.dll
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.pdb
