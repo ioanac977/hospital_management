@@ -1,9 +1,34 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
-class PatientsList extends Component {
+class PatientsList extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            nameFilter :''
+        };
+    }
+    onChangeHandler(e){
+        this.setState({
+            nameFilter: e.target.value,
+        })
+    }
+
     render() {
-        const items = this.props.items;
-        return <Table striped>
+
+        let items = this.props.items
+            .filter(d => this.state.nameFilter === '' || (d.name.toLowerCase()).includes((this.state.nameFilter).toLowerCase()))
+
+        return <div>
+            <p>
+                Type to filter list by name:
+                <input id="nameFilter"
+                       name="nameFilter"
+                       type="text"
+                       value={this.state.nameFilter}
+                       onChange={this.onChangeHandler.bind(this)}
+                />
+            </p>
+            <Table striped>
             <thead className="thead-dark">
             <tr>
                 <th>Id</th>
@@ -15,7 +40,7 @@ class PatientsList extends Component {
             <tbody>
             {!items || items.length <= 0 ?
                 <tr>
-                    <td colSpan="5" align="center"><b>No Users yet</b></td>
+                    <td colSpan="5" align="center"><b>No patients added yet!</b></td>
                 </tr>
                 : items.map(item => (
                     <tr key={item.id}>
@@ -34,7 +59,8 @@ class PatientsList extends Component {
                     </tr>
                 ))}
             </tbody>
-        </Table>;
+        </Table>
+        </div>;
     }
 }
 export default PatientsList;

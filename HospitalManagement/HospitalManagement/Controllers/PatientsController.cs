@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using HospitalManagement.Data;
 using HospitalManagement.Models;
 using HospitalManagement.Services;
+using Microsoft.AspNetCore.Cors;
 
 namespace HospitalManagement.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("ReactPolicy")]
     [ApiController]
     public class PatientsController : ControllerBase
     {
