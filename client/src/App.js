@@ -3,15 +3,14 @@ import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
 import Home from './components/Home';
 import {Link, Route, BrowserRouter as Router , Switch} from "react-router-dom";
-import UsersList from "./components/UsersList";
+import Users from "./components/Users";
 
 class App extends Component {
   render() {
-    return <Fragment>
+    return <Router>
+        <Fragment>
 
-      <AppHeader />
-      {/*<Home />*/}
-      <Router>
+          <AppHeader />
 
         {/*<ul>*/}
         {/*  <li>*/}
@@ -24,16 +23,16 @@ class App extends Component {
 
         <Switch>
           <Route path="/users">
-            <UsersList/>
+            <Users/>
           </Route>
           <Route path="/">
             <Home/>
           </Route>
         </Switch>
-
+          <AppFooter />
+        </Fragment>;
       </Router>
-      <AppFooter />
-    </Fragment>;
+
   }
 }
 export default App;

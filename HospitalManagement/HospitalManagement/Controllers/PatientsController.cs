@@ -59,11 +59,8 @@ namespace HospitalManagement.Controllers
             {
                 return BadRequest(ModelState);
             }
+            patient.Id = id;
 
-            if (id != patient.Id)
-            {
-                return BadRequest();
-            }
 
             patientService.SetEntityState(patient, EntityState.Modified);
 

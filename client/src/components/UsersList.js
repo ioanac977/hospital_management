@@ -1,62 +1,30 @@
 import React, { Component } from 'react';
-import {Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Col, Row, Container} from 'reactstrap';
+import {Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Col, Row, Container, Button} from 'reactstrap';
 import { USERS_API_URL } from '../constants';
-class UsersList extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            nameFilter :'',
-            hospitalFilter :'',
-            isDropdownOpen : false,
-            items: []
-        };
-    }
-    componentDidMount() {
-        this.getItems();
-    }
-    getItems = () => {
-        fetch(USERS_API_URL)
-            .then(res => res.json())
-            .then(res => this.setState({ items: res }))
-            .catch(err => console.log(err));
-    }
-    onChangeHandler(e){
-        this.setState({
-            nameFilter: e.target.value,
-        })
-    }
-    onDropDownToogle(e){
-        this.setState({
-            isDropdownOpen: !this.state.isDropdownOpen,
-        })
-    }
-    onDropdownItemSelect (e)
-    {
-        console.log("click value :",e);
-        this.setState({
-            hospitalFilter: e,
-        })
+import RegistrationModal from "./form/RegistrationModal";
+class UsersList extends Component {
 
-    }
-    onDropdownSelectAll(){
-        this.setState({
-            hospitalFilter: '',
-        })
+    deleteItem = id => {
+        let confirmDeletion = window.confirm('Do you really wish to delete it?');
+        if (confirmDeletion) {
+            fetch(`${USERS_API_URL}/${id}`, {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => {
+                    this.props.deleteItemFromState(id);
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     render() {
 
-        let items = this.state.items;
+        const items = this.props.items;
 
-        return <Container style={{ paddingTop: "100px" }}>
-            <Row>
-                <Col>
-                    <h3>Users</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-            <Table striped>
+        return <Table striped>
                 <thead className="thead-dark">
                 <tr>
                     <th>Id</th>
@@ -64,6 +32,7 @@ class UsersList extends React.Component {
                     <th>Password</th>
                     <th>Name</th>
                     <th>Is Admin</th>
+                    <th style={{ textAlign: "center" }}>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -86,15 +55,22 @@ class UsersList extends React.Component {
                                 {item.name}
                             </td>
                             <td>
-                                {item.isAdmin}
+                                {item.isAdmin.toString()}
+                            </td>
+                            <td align="center">
+                                <div>
+                                    <RegistrationModal
+                                        isNew={false}
+                                        user={item}
+                                        updateUserIntoState={this.props.updateState} />
+                                    &nbsp;&nbsp;&nbsp;
+                                    <Button color="danger" onClick={() => this.deleteItem(item.id)}>Delete</Button>
+                                </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-                </Col>
-            </Row>
-        </Container>;
     }
 }
 export default UsersList;

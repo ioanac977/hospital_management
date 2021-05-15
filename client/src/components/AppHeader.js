@@ -11,7 +11,8 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem
-} from 'reactstrap'; // 2
+} from 'reactstrap';
+import {Link} from "react-router-dom"; // 2
 class AppHeader extends Component { // 3
     state = { // 4
         isOpen: false
@@ -44,7 +45,7 @@ class AppHeader extends Component { // 3
                     {/*    </DropdownMenu>*/}
                     {/*</UncontrolledDropdown>*/}
                     <NavItem>
-                        <NavLink href="/users">Users</NavLink>
+                        <Link to="/users" >Users</Link>
                     </NavItem>
                 </Nav>
             </Collapse>
