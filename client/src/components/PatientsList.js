@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {PATIENTS_API_URL} from "../constants";
 
 class PatientsList extends React.Component {
     constructor(props) {
@@ -8,8 +9,10 @@ class PatientsList extends React.Component {
             nameFilter :'',
             hospitalFilter :'',
             isDropdownOpen : false,
+
         };
     }
+
     onChangeHandler(e){
         this.setState({
             nameFilter: e.target.value,

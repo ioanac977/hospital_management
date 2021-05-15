@@ -8,14 +8,15 @@ namespace HospitalManagement.Data
 {
     public class DbInitializer
     {
+
         public static void Initialize(HospitalContext context)
         {
             context.Database.EnsureCreated();
 
-            // Look for any 
+            //InitializePatientTable(context);
             if (context.Patients.Any())
             {
-                return;   // DB has been seeded
+               return;   // DB has been seeded
             }
 
             var patients = new Patient[]
@@ -33,7 +34,28 @@ namespace HospitalManagement.Data
             {
                 context.Patients.Add(p);
             }
+
             context.SaveChanges();
+
+            var users = new User[]
+            {
+            new User{Username="Carson",Password="00001",Name = "ABC",IsAdmin = false},
+            new User{Username="Meredith",Password="00001",Name = "ABC",IsAdmin = false},
+            new User{Username="Arturo",Password="00001",Name = "ABC",IsAdmin = true},
+            new User{Username="Gytis",Password="00001",Name = "ABC",IsAdmin = false},
+            new User{Username="Yan",Password="00001",Name = "ABC",IsAdmin = false},
+            new User{Username="Peggy",Password="00001",Name = "ABC",IsAdmin = false},
+            new User{Username="Laura",Password="00001",Name = "ABC",IsAdmin = false},
+            new User{Username="Nino",Password="00001",Name = "ABC",IsAdmin = false}
+            };
+            foreach (User u in users)
+            {
+                context.Users.Add(u);
+            }
+            //InitializeUserTable(context);
+            context.SaveChanges();
+
+
 
         }
     }

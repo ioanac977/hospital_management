@@ -31,17 +31,21 @@ class AppHeader extends Component { // 3
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <NavLink href="/">Hello</NavLink>
+                        <NavLink href="/">Patients</NavLink>
+
                     </NavItem>
-                    <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle nav caret>
-                            World
-                        </DropdownToggle>
-                        <DropdownMenu right>
-                            <DropdownItem href="/">For U</DropdownItem>
-                            <DropdownItem>For Us</DropdownItem>
-                        </DropdownMenu>
-                    </UncontrolledDropdown>
+                    {/*<UncontrolledDropdown nav inNavbar>*/}
+                    {/*    <DropdownToggle nav caret>*/}
+                    {/*        World*/}
+                    {/*    </DropdownToggle>*/}
+                    {/*    <DropdownMenu right>*/}
+                    {/*        <DropdownItem href="/">For U</DropdownItem>*/}
+                    {/*        <DropdownItem>For Us</DropdownItem>*/}
+                    {/*    </DropdownMenu>*/}
+                    {/*</UncontrolledDropdown>*/}
+                    <NavItem>
+                        <NavLink href="/users">Users</NavLink>
+                    </NavItem>
                 </Nav>
             </Collapse>
         </Navbar>;
