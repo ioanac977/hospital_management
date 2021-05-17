@@ -4,6 +4,7 @@ import AppFooter from './components/AppFooter';
 import Home from './components/Home';
 import {Link, Route, BrowserRouter as Router , Switch} from "react-router-dom";
 import Users from "./components/Users";
+import Account from "./components/Account";
 
 class App extends Component {
   render() {
@@ -25,6 +26,9 @@ class App extends Component {
           <Route path="/users">
             <Users/>
           </Route>
+            <Route path="/account">
+                <Account/>
+            </Route>
           <Route path="/">
             <Home/>
           </Route>

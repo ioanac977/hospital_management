@@ -33,20 +33,18 @@ class AppHeader extends Component { // 3
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                         <NavLink href="/">Patients</NavLink>
-
                     </NavItem>
-                    {/*<UncontrolledDropdown nav inNavbar>*/}
-                    {/*    <DropdownToggle nav caret>*/}
-                    {/*        World*/}
-                    {/*    </DropdownToggle>*/}
-                    {/*    <DropdownMenu right>*/}
-                    {/*        <DropdownItem href="/">For U</DropdownItem>*/}
-                    {/*        <DropdownItem>For Us</DropdownItem>*/}
-                    {/*    </DropdownMenu>*/}
-                    {/*</UncontrolledDropdown>*/}
                     <NavItem>
-                        <Link to="/users" >Users</Link>
+                        <NavLink href="/users">Users</NavLink>
                     </NavItem>
+                    <NavItem>
+                        <NavLink href="/account">Account</NavLink>
+                    </NavItem>
+
+                    {/*USE THIS VERSION:*/}
+                    {/*<NavItem>*/}
+                    {/*    <Link to="/users" >Users</Link>*/}
+                    {/*</NavItem>*/}
                 </Nav>
             </Collapse>
         </Navbar>;

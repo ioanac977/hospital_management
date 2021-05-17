@@ -9,11 +9,14 @@ using HospitalManagement.Data;
 using HospitalManagement.Models;
 using HospitalManagement.Services;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalManagement.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("ReactPolicy")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     [ApiController]
     public class PatientsController : ControllerBase
     {

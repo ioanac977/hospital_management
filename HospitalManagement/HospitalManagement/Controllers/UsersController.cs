@@ -9,11 +9,14 @@ using HospitalManagement.Data;
 using HospitalManagement.Models;
 using HospitalManagement.Services;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace HospitalManagement.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("ReactPolicy")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -27,6 +30,7 @@ namespace HospitalManagement.Controllers
 
         // GET: api/Users
         [HttpGet]
+        [Authorize(Policy = "AdminOnly")]
         public IEnumerable<User> GetUsers()
         {
             return userService.GetUsers();
