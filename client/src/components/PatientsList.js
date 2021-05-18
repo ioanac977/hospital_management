@@ -38,7 +38,7 @@ class PatientsList extends React.Component {
     }
 
     render() {
-
+        console.log("sessionStorage on login:",sessionStorage.getItem('token'));
         let items = this.props.items
             .filter(d => this.state.nameFilter === '' || (d.name.toLowerCase()).includes((this.state.nameFilter).toLowerCase()))
         items = items

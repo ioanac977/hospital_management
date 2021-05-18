@@ -2,34 +2,17 @@ import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import PatientsList from './PatientsList';
 import { PATIENTS_API_URL } from '../constants';
+import Redirect from "react-router-dom/es/Redirect";
 class Home extends Component {
-    state = {
-        items: []
-    }
-    componentDidMount() {
-        this.getItems();
-    }
-    getItems = () => {
-        fetch( PATIENTS_API_URL,  {credentials: 'same-origin'})
-            .then(res => res.json())
-            .then(res => this.setState({ items: res }))
-            .catch(err => console.log(err));
-    }
+
     render() {
-        return <Container style={{ paddingTop: "100px" }}>
-            <Row>
-                <Col>
-                    <h3>Patients</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <PatientsList
-                        items={this.state.items}
-                    />
-                </Col>
-            </Row>
-        </Container>;
+        let authUserFromStorage=JSON.parse(localStorage.getItem("authorizedUser"));
+        if(authUserFromStorage!=null){
+           return <div>
+               <img src= "https://cdn.dribbble.com/users/112162/screenshots/1130822/lifeline.gif" />
+           </div>
+        }
+        return (<Redirect to={'/login'}/>)
     }
 }
 export default Home;

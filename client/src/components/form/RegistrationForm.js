@@ -14,6 +14,7 @@ class RegistrationForm extends React.Component {
     }
 
     componentDidMount() {
+        this.handleCheckbox.bind(this);
         if (this.props.user) {
             const { id, username, password, name, isAdmin } = this.props.user
             this.setState({ id, username, password, name, isAdmin});
@@ -22,6 +23,19 @@ class RegistrationForm extends React.Component {
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value })
+    }
+
+    handleCheckbox= event => {
+
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log("value is :",value)
+        console.log("name:",name)
+        this.setState({
+            [name]: value
+        });
+
     }
 
     submitNew = e => {
@@ -59,7 +73,7 @@ class RegistrationForm extends React.Component {
                 username: this.state.username,
                 password: this.state.password,
                 name: this.state.name,
-                isAdmin: false
+                isAdmin: this.state.isAdmin
             })
         })
             .then(() => {
@@ -81,7 +95,11 @@ class RegistrationForm extends React.Component {
             </FormGroup>
             <FormGroup>
                 <Label for="name">Name:</Label>
-                <Input type="name" name="name" onChange={this.onChange} value={this.state.name === null ? '' : this.state.name} />
+                <Input type="text" name="name" onChange={this.onChange} value={this.state.name === null ? '' : this.state.name} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="name">IsAdmin:</Label>
+                <Input type="checkbox" name="isAdmin" onChange={this.handleCheckbox} checked={this.state.isAdmin} />
             </FormGroup>
 
             <Button>Send</Button>

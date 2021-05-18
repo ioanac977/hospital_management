@@ -5,14 +5,25 @@ import RegistrationModal from "./form/RegistrationModal";
 class Account extends Component {
     state = {
         item: {},
-        id : 1
+        id : 0
     }
     componentDidMount() {
         this.getItem();
     }
 
     getItem = () => {
-        fetch(`${USERS_API_URL}/${this.state.id}`)
+        console.log("this.props",this.props);
+        let id = this.state.id;
+        if(this.props.authUser.id !== undefined)
+         id = this.props.authUser.id;
+        else{
+            let authUserFromStorage=JSON.parse(localStorage.getItem("authorizedUser"));
+            if(authUserFromStorage!=null){
+                id = authUserFromStorage.id;
+            }
+        }
+
+        fetch(`${USERS_API_URL}/${id}`)
             .then(res => res.json())
             .then(res => this.setState({ item: res }))
             .catch(err => console.log(err));
@@ -21,7 +32,7 @@ class Account extends Component {
         this.getItem();
     }
     render() {
-
+        console.log('account render', this.props);
         const item = this.state.item
 
         return <Table striped>

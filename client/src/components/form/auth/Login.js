@@ -5,6 +5,7 @@ import {
     Button, FormText, FormFeedback,
 } from 'reactstrap';
 import {AUTH_API_URL, PATIENTS_API_URL, USERS_API_URL} from "../../../constants";
+import Redirect from "react-router-dom/es/Redirect";
 
 class Login extends Component {
     constructor(props) {
@@ -15,12 +16,14 @@ class Login extends Component {
             validate: {
                 usernameState: '',
             },
+            navigate:false,
+            authUser :{}
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
     validateEmail(e) {
-        const usernameRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
         const { validate } = this.state
         if ((e.target.value).length > 2) {
             validate.usernameState = 'has-success'
@@ -55,60 +58,71 @@ class Login extends Component {
             })
         })
             .then(res => res.json())
-            .then(user => {console.log("Successfully login")
+            .then(authUser => {
+                localStorage.setItem("authorizedUser",JSON.stringify(authUser));
+                this.props.handleLogin(authUser);
+                this.setState({navigate:true});
+                }
+                )
 
-            })
             .catch(err => console.log(err));
+
     }
 
     render() {
         const { username, password } = this.state;
-        return (
-            <Container className="App">
-                <h2>Sign In</h2>
-                <Form className="form" onSubmit={ (e) => this.submitForm(e) }>
-                    <Col>
-                        <FormGroup>
-                            <Label>Username</Label>
-                            <Input
-                                type="username"
-                                name="username"
-                                id="exampleEmail"
-                                placeholder="myusername@username.com"
-                                value={ username }
-                                valid={ this.state.validate.usernameState === 'has-success' }
-                                invalid={ this.state.validate.usernameState === 'has-danger' }
-                                onChange={ (e) => {
-                                    this.validateEmail(e)
-                                    this.handleChange(e)
-                                } }
-                            />
-                            <FormFeedback valid>
-                                That's a tasty looking username you've got there.
-                            </FormFeedback>
-                            <FormFeedback>
-                                Uh oh! Looks like there is an issue with your username. Please input a correct username.
-                            </FormFeedback>
-                            <FormText>Your username is most likely your username.</FormText>
-                        </FormGroup>
-                    </Col>
-                    <Col>
-                        <FormGroup>
-                            <Label for="examplePassword">Password</Label>
-                            <Input
-                                type="password"
-                                name="password"
-                                id="examplePassword"
-                                placeholder="********"
-                                value={ password }
-                                onChange={ (e) => this.handleChange(e) }
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Button>Submit</Button>
-                </Form>
-            </Container>
-        );
+        if(!this.state.navigate) {
+            return (
+                <Container className="App">
+                    <h2>Sign In</h2>
+                    <Form className="form" onSubmit={(e) => this.submitForm(e)}>
+                        <Col>
+                            <FormGroup>
+                                <Label>Username</Label>
+                                <Input
+                                    type="username"
+                                    name="username"
+                                    id="exampleEmail"
+                                    placeholder="myusername@username.com"
+                                    value={username}
+                                    valid={this.state.validate.usernameState === 'has-success'}
+                                    invalid={this.state.validate.usernameState === 'has-danger'}
+                                    onChange={(e) => {
+                                        this.validateEmail(e)
+                                        this.handleChange(e)
+                                    }}
+                                />
+                                <FormFeedback valid>
+                                    That's a tasty looking username you've got there.
+                                </FormFeedback>
+                                <FormFeedback>
+                                    Uh oh! Looks like there is an issue with your username. Please input a correct
+                                    username.
+                                </FormFeedback>
+                                <FormText>Your username is most likely your username.</FormText>
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label for="examplePassword">Password</Label>
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="examplePassword"
+                                    placeholder="********"
+                                    value={password}
+                                    onChange={(e) => this.handleChange(e)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Button>Submit</Button>
+                    </Form>
+                </Container>
+            );
+        }else
+        {
+            return (<Redirect to={'/'}/>)
+        }
     }
 }
 

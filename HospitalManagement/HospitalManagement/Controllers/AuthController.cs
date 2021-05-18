@@ -74,7 +74,7 @@ namespace HospitalManagement.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));
 
-            return Ok(new { Message = "You are logged in" });
+            return Ok(authUser);
         }
 
         [HttpPost]

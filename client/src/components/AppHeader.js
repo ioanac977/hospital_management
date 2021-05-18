@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; // 1
+import React, {Component, Fragment} from 'react'; // 1
 import {
     Navbar,
     NavbarBrand,
@@ -24,6 +24,7 @@ class AppHeader extends Component { // 3
         })
     }
     render() { // 7
+        let authUser = JSON.parse(localStorage.getItem("authorizedUser"))
         return <Navbar color="dark" dark expand="md">
             <NavbarBrand href="/">
                 <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png" width="50" className="d-inline-block align-top" alt="" />
@@ -31,23 +32,29 @@ class AppHeader extends Component { // 3
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <NavLink href="/">Patients</NavLink>
+                    {authUser !=null &&
+                        <Fragment>
+                    <NavItem >
+                        <Link className="Link" to="/patients">Patients</Link>
                     </NavItem>
-                    <NavItem>
-                        <NavLink href="/users">Users</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="/account">Account</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="/login">Login</NavLink>
-                    </NavItem>
+                            {authUser.isAdmin &&
 
-                    {/*USE THIS VERSION:*/}
+                    <NavItem>
+                        <Link to ="/users">Users</Link>
+                    </NavItem>
+                                }
+                    <NavItem>
+                        <Link to = "/account">Account</Link>
+                    </NavItem>
                     {/*<NavItem>*/}
-                    {/*    <Link to="/users" >Users</Link>*/}
+                    {/*    <Link to="/login">Login</Link>*/}
                     {/*</NavItem>*/}
+                    <NavItem>
+                        <Link to="/logout">Logout</Link>
+                    </NavItem>
+                        </Fragment>
+                        }
+
                 </Nav>
             </Collapse>
         </Navbar>;
