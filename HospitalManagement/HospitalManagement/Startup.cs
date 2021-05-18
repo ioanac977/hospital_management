@@ -36,12 +36,12 @@ namespace HospitalManagement
                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                {
                    options.SlidingExpiration = true;
-                   options.ExpireTimeSpan = new TimeSpan(0, 1, 0);
+                   options.ExpireTimeSpan = new TimeSpan(1, 0, 0);
                });
             //Add Authorization 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin","True"));
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //Enable CORS 

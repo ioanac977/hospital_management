@@ -10,7 +10,7 @@ class Home extends Component {
         this.getItems();
     }
     getItems = () => {
-        fetch( PATIENTS_API_URL)
+        fetch( PATIENTS_API_URL,  {credentials: 'same-origin'})
             .then(res => res.json())
             .then(res => this.setState({ items: res }))
             .catch(err => console.log(err));

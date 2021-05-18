@@ -20,11 +20,12 @@ namespace HospitalManagement.Services
         {
             return context.Users.Any(e => e.Username == username && e.Password == password);
         }
-        public User getAuthUser(String username, String password)
+        public User getAuthUser(String username)
         {
           
-            return context.Users.Where(e => e.Username == username && e.Password == password).Single();
+            return context.Users.Where(e => e.Username == username).Single();
 
         }
+
     }
 }

@@ -40,6 +40,9 @@ class AppHeader extends Component { // 3
                     <NavItem>
                         <NavLink href="/account">Account</NavLink>
                     </NavItem>
+                    <NavItem>
+                        <NavLink href="/login">Login</NavLink>
+                    </NavItem>
 
                     {/*USE THIS VERSION:*/}
                     {/*<NavItem>*/}

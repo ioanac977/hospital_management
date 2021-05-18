@@ -11,8 +11,11 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "reactstrap": "latest",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "bootstrap":"^5.0.1",
+    "http-proxy-middleware": "latest"
   },
+  "proxy": "https://localhost:44392/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

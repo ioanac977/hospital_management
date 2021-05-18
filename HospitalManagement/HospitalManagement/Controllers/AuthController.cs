@@ -43,26 +43,27 @@ namespace HospitalManagement.Controllers
             await userService.SaveChangesAsync();
 
 
-            return Ok(new { Message = "User Reigstration Successful" });
+            return Ok(new { Message = "User Registration Successful" });
         }
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromBody]User credentials)
+        public async Task<IActionResult> Login([FromBody]UserCredentials credentials)
         {
             if (!ModelState.IsValid || credentials == null)
             {
                 return new BadRequestObjectResult(new { Message = "Login failed" });
             }
 
-            var identifiedUser = authService.checkCredentials(credentials.Username, credentials.Password);
-            if (identifiedUser == false)
-            {
+            User authUser = authService.getAuthUser(credentials.Username);
+           
+            if (authUser == null)
                 return new BadRequestObjectResult(new { Message = "Login failed" });
-            }
 
-            User authUser = authService.getAuthUser(credentials.Username, credentials.Password);
-            
+            var isPasswordValid = userService.VerifyPassword(authUser.Password, credentials.Password);
+            if (!isPasswordValid)
+                return new BadRequestObjectResult(new { Message = "Login failed" });
+
             var userClaim = new List<Claim> { new Claim("IsAdmin", authUser.IsAdmin.ToString())};
           
 

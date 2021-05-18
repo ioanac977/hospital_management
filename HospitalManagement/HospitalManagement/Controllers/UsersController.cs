@@ -65,6 +65,8 @@ namespace HospitalManagement.Controllers
             }
 
             user.Id = id;
+            var initialPassword = user.Password;
+            user.Password = userService.hashPassword(user.Password,null,false);
 
             userService.SetEntityState(user, EntityState.Modified);
 
@@ -95,7 +97,7 @@ namespace HospitalManagement.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            user.Password = userService.hashPassword(user.Password);
             userService.AddUser(user);
             await userService.SaveChangesAsync();
 
