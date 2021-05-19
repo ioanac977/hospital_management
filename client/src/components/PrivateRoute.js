@@ -4,7 +4,7 @@ import {Redirect, Route} from 'react-router-dom';
 
 export const PrivateRoute = ({component: Component, roles, ...rest}) => (
     <Route {...rest} render={props => {
-        const currentUser = JSON.parse(localStorage.getItem("authorizedUser"));
+        const currentUser = JSON.parse(sessionStorage.getItem("authorizedUser"));
         console.log("currentUser:", currentUser);
         if (!currentUser) {
             // not logged in so redirect to login page with the return url

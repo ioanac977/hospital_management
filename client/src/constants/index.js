@@ -3,3 +3,4 @@ export const USERS_API_URL = 'api/Users';
 export const AUTH_API_URL = 'api/Auth/Login';
 export const LOGOUT_API_URL = 'api/Auth/Logout';
 export const CHECK_USERNAME_API_URL = 'api/Auth/CheckUsername';
+export const EDIT_USER_INFO = "api/Users/UserInfo"

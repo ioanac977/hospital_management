@@ -19,7 +19,7 @@ class Account extends Component {
         if (this.props.authUser.id !== undefined)
             id = this.props.authUser.id;
         else {
-            let authUserFromStorage = JSON.parse(localStorage.getItem("authorizedUser"));
+            let authUserFromStorage = JSON.parse(sessionStorage.getItem("authorizedUser"));
             if (authUserFromStorage != null) {
                 id = authUserFromStorage.id;
             }

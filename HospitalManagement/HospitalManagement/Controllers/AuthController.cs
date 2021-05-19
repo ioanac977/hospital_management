@@ -61,6 +61,7 @@ namespace HospitalManagement.Controllers
                 return new BadRequestObjectResult(new { Message = "Login failed" });
 
             var isPasswordValid = userService.VerifyPassword(authUser.Password, credentials.Password);
+
             if (!isPasswordValid)
                 return new BadRequestObjectResult(new { Message = "Login failed" });
 

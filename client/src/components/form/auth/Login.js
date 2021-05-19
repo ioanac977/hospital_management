@@ -59,7 +59,7 @@ class Login extends Component {
             .then(res => res.json())
             .then(authUser => {
                     if (authUser.username) {
-                        localStorage.setItem("authorizedUser", JSON.stringify(authUser));
+                        sessionStorage.setItem("authorizedUser", JSON.stringify(authUser));
                         this.setState({redirect: true});
                     } else {
                         this.setState({loginError: true});
