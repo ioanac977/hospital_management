@@ -11,6 +11,7 @@ import {PrivateRoute} from "./components/PrivateRoute";
 import {Role} from "./_helpers/Role";
 import Patients from "./components/Patients";
 import "./App.css";
+import {ProtectedRoute} from "./components/ProtectedRoute";
 
 class App extends Component {
     constructor(props) {
@@ -20,7 +21,6 @@ class App extends Component {
         }
     }
     setGlobalCredentials = (authUser) => {
-        console.log("authUser",authUser)
             this.setState({
                 currentUser: authUser
             });
@@ -28,41 +28,24 @@ class App extends Component {
 
 
   render() {
-        console.log('APP.js render', this.state);
+
     return <Router>
         <Fragment>
-
           <AppHeader />
-
-        {/*<ul>*/}
-        {/*  <li>*/}
-        {/*    <Link to="/">Home</Link>*/}
-        {/*  </li>*/}
-        {/*  <li>*/}
-        {/*    <Link to="/users">Users</Link>*/}
-        {/*  </li>*/}
-        {/*</ul>*/}
-
-        <Switch>
-          {/*<Route path="/users">*/}
-          {/*  <Users/>*/}
-          {/*</Route>*/}
-            <PrivateRoute path="/users" roles={[Role.Admin]} component={Users} />
-            <Route path="/account" component={() => <Account authUser={this.state.currentUser}/>} />
-            <Route path="/login" >
-            <Login handleLogin={this.setGlobalCredentials}/>
-            </Route>
-            <Route path="/logout">
-                <Logout handleLogout={this.setGlobalCredentials}/>
-            </Route>
-            <Route path="/patients">
-                <Patients/>
-            </Route>
-            <Route path="/">
-                <Home/>
-            </Route>
-
-        </Switch>
+            <Switch>
+                <PrivateRoute path="/users" roles={[Role.Admin]} component={Users} />
+                <ProtectedRoute path="/account" component={() => <Account authUser={this.state.currentUser}/>} />
+                <Route path="/login" >
+                    <Login handleLogin={this.setGlobalCredentials}/>
+                </Route>
+                <Route path="/logout">
+                    <Logout handleLogout={this.setGlobalCredentials}/>
+                </Route>
+                <ProtectedRoute path="/patients" component={Patients}/>
+                <Route path="/">
+                    <Home/>
+                </Route>
+            </Switch>
           <AppFooter />
         </Fragment>;
       </Router>

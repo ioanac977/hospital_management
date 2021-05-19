@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HospitalManagement.Data;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -44,7 +46,7 @@ namespace HospitalManagement
                 options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin","True"));
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            //Enable CORS 
+            //Enable CORS for development use  
             services.AddCors(o => o.AddPolicy("ReactPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -52,7 +54,6 @@ namespace HospitalManagement
                        .AllowAnyHeader()
                        .AllowCredentials();
             }));
-            //JSON Serializer 
 
         }
 
@@ -69,9 +70,12 @@ namespace HospitalManagement
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
+
             app.UseMvc();
             app.UseAuthentication();
-
 
 
             app.UseCors("ReactPolicy");

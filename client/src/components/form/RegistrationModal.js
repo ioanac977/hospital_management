@@ -1,18 +1,18 @@
-import React, { Component, Fragment } from 'react';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import React, {Component, Fragment} from 'react';
+import {Button, Modal, ModalBody, ModalHeader} from 'reactstrap';
 import RegistrationForm from './RegistrationForm';
 
 class RegistrationModal extends Component {
 
     state = {
         modal: false
-    }
+    };
 
     toggle = () => {
         this.setState(previous => ({
             modal: !previous.modal
         }));
-    }
+    };
 
     render() {
         const isNew = this.props.isNew;
@@ -25,7 +25,7 @@ class RegistrationModal extends Component {
             button = <Button
                 color="success"
                 onClick={this.toggle}
-                style={{ minWidth: "200px" }}>Add</Button>;
+                style={{minWidth: "200px"}}>Add</Button>;
         } else {
             button = <Button
                 color="warning"
@@ -42,7 +42,9 @@ class RegistrationModal extends Component {
                         addUserToState={this.props.addUserToState}
                         updateUserIntoState={this.props.updateUserIntoState}
                         toggle={this.toggle}
-                        user={this.props.user} />
+                        user={this.props.user}
+                        users={this.props.users}
+                    />
                 </ModalBody>
             </Modal>
         </Fragment>;

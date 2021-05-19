@@ -124,6 +124,7 @@ namespace HospitalManagement.Controllers
 
             return Ok(user);
         }
+      
 
     }
 }

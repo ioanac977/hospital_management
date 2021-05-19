@@ -85,5 +85,13 @@ namespace HospitalManagement.Controllers
             return Ok(new { Message = "You are logged out" });
         }
 
+        [HttpPost]
+        [Route("CheckUsername")]
+        public IActionResult CheckIfUsernameIsUnique([FromBody] UsernameCheck account)
+        {
+
+            return Ok(authService.checkUsername(account.Username));
+        }
+
     }
 }

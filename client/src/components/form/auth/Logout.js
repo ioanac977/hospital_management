@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { Button } from 'reactstrap';
 import Redirect from "react-router-dom/es/Redirect";
-import {AUTH_API_URL, LOGOUT_API_URL} from "../../../constants";
+import {LOGOUT_API_URL} from "../../../constants";
+
 class Logout extends Component {
     state = {
-        navigate:false
+        navigate: false
     };
+
     componentDidMount() {
         this.logout();
     }
@@ -13,10 +14,10 @@ class Logout extends Component {
 
     logout = () => {
         sessionStorage.removeItem('token');
-        console.log("localstorage before logout:",localStorage.getItem('authorizedUser'));
+        console.log("localstorage before logout:", localStorage.getItem('authorizedUser'));
         localStorage.removeItem('authorizedUser');
-        console.log("localstorage on logout:",localStorage.getItem('authorizedUser'));
-        this.setState({navigate:true});
+        console.log("localstorage on logout:", localStorage.getItem('authorizedUser'));
+        this.setState({navigate: true});
         this.props.handleLogout({});
 
         fetch(LOGOUT_API_URL, {
@@ -28,7 +29,8 @@ class Logout extends Component {
 
         })
             .then(res => res.json())
-            .then(user => {console.log("Successfully logout");
+            .then(user => {
+                console.log("Successfully logout");
 
 
             })
@@ -37,12 +39,12 @@ class Logout extends Component {
 
     };
 
-    render(){
-    const {navigate} = this.state;
-    if (navigate) {
-        return <Redirect to="/" push={true}/>;
-    }
-    return <div>Succesfully logged out</div>
+    render() {
+        const {navigate} = this.state;
+        if (navigate) {
+            return <Redirect to="/" push={true}/>;
+        }
+        return <div>Succesfully logged out</div>
     }
 }
 
