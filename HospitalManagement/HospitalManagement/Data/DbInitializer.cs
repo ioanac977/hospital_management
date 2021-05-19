@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.Models;
+using HospitalManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,17 +37,20 @@ namespace HospitalManagement.Data
             }
 
             context.SaveChanges();
+            UserService userService = new UserService(context);
 
+            String hashedPassword = userService.hashPassword("00001", null, false);
             var users = new User[]
             {
-            new User{Username="Carson",Password="00001",Name = "ABC",IsAdmin = false},
-            new User{Username="Meredith",Password="00001",Name = "ABC",IsAdmin = false},
-            new User{Username="Arturo",Password="00001",Name = "ABC",IsAdmin = true},
-            new User{Username="Gytis",Password="00001",Name = "ABC",IsAdmin = false},
-            new User{Username="Yan",Password="00001",Name = "ABC",IsAdmin = false},
-            new User{Username="Peggy",Password="00001",Name = "ABC",IsAdmin = false},
-            new User{Username="Laura",Password="00001",Name = "ABC",IsAdmin = false},
-            new User{Username="Nino",Password="00001",Name = "ABC",IsAdmin = false}
+              
+            new User{Username="Carson",Password=hashedPassword,Name = "ABC",IsAdmin = false},
+            new User{Username="Meredith",Password=hashedPassword,Name = "ABC",IsAdmin = false},
+            new User{Username="Arturo",Password=hashedPassword,Name = "ABC",IsAdmin = true},
+            new User{Username="Gytis",Password=hashedPassword,Name = "ABC",IsAdmin = false},
+            new User{Username="Yan",Password=hashedPassword,Name = "ABC",IsAdmin = false},
+            new User{Username="Peggy",Password=hashedPassword,Name = "ABC",IsAdmin = false},
+            new User{Username="Laura",Password=hashedPassword,Name = "ABC",IsAdmin = false},
+            new User{Username="Nino",Password=hashedPassword,Name = "ABC",IsAdmin = false}
             };
             foreach (User u in users)
             {
