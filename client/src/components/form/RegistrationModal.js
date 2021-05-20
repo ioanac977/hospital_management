@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Modal, ModalBody, ModalHeader} from 'reactstrap';
-import RegistrationForm from './RegistrationForm';
+import AddUserForm from './AddUserForm';
+import EditUserForm from './EditUserForm';
+
 
 class RegistrationModal extends Component {
 
@@ -38,13 +40,22 @@ class RegistrationModal extends Component {
                 <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
 
                 <ModalBody>
-                    <RegistrationForm
-                        addUserToState={this.props.addUserToState}
-                        updateUserIntoState={this.props.updateUserIntoState}
-                        toggle={this.toggle}
-                        user={this.props.user}
-                        users={this.props.users}
-                    />
+                    {isNew && 
+                        <AddUserForm
+                           addUserToState={this.props.addUserToState}
+                           updateUserIntoState={this.props.updateUserIntoState}
+                           toggle={this.toggle}
+                           user={this.props.user}
+                           users={this.props.users}
+                       /> ||
+                        <EditUserForm
+                            addUserToState={this.props.addUserToState}
+                            updateUserIntoState={this.props.updateUserIntoState}
+                            toggle={this.toggle}
+                            user={this.props.user}
+                            users={this.props.users}
+                        />
+                    }
                 </ModalBody>
             </Modal>
         </Fragment>;

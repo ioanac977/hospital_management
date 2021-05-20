@@ -3,7 +3,7 @@ import {Button, Form, FormFeedback, FormGroup, Input, Label} from 'reactstrap';
 
 import {CHECK_USERNAME_API_URL, EDIT_USER_INFO, USERS_API_URL} from '../../constants';
 
-class RegistrationForm extends React.Component {
+class AddUserForm extends React.Component {
 
     state = {
         id: 0,
@@ -70,12 +70,6 @@ class RegistrationForm extends React.Component {
             .catch(err => console.log(err));
 
     }
-    changePassword() {
-
-    }
-    changeEditingFlag() {
-        this.setState({isPasswordEditing: !this.state.isPasswordEditing})
-    }
 
     checkPassword(e){
         const {validate} = this.state;
@@ -96,8 +90,8 @@ class RegistrationForm extends React.Component {
         let currentUserValue = e.target.value;
 
         //if logged user is NOT admin then we need to make requests to check if new username already exist in users table
-        if (userList == null) {
-            if(currentUserValue.localeCompare(JSON.parse(sessionStorage.getItem("authorizedUser")).username)!==0)
+        if (userList === null) {
+            if(currentUserValue.localeCompare(JSON.parse(sessionStorage.getItem("authorizedUser")).username)!== 0)
                  this.makeCheckRequest(currentUserValue);
 
         }//if logged user is admin then he has access to usersList -> we are making a check based on data that is already available
@@ -105,13 +99,8 @@ class RegistrationForm extends React.Component {
             validate.usernameState = 'has-danger';
             let buttonFlag = false;
             if (currentUserValue.length > 2) {
-                if(currentUserValue.localeCompare(this.props.user.username) !==0) {
-                    const existingUser = userList.find(user => user.username === currentUserValue);
-                    if (!existingUser) {
-                        validate.usernameState = 'has-success';
-                        buttonFlag = true;
-                    }
-                }else{
+                const existingUser = userList.find(user => user.username === currentUserValue);
+                if (!existingUser) {
                     validate.usernameState = 'has-success';
                     buttonFlag = true;
                 }
@@ -145,64 +134,11 @@ class RegistrationForm extends React.Component {
             .catch(err => console.log(err));
     };
 
-    submitEdit = e => {
-        e.preventDefault();
-        let requestBody = {
-            username: this.state.username,
-            name: this.state.name,
-            isAdmin: this.state.isAdmin
-        }
-
-        if(this.state.isPasswordEditing){
-           requestBody.password = this.state.password;
-        }
-        fetch(`${EDIT_USER_INFO}/${this.state.id}`, {
-            method: 'put',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestBody)
-        })
-            .then(() => {
-                this.props.toggle();
-                this.props.updateUserIntoState(this.state.id);
-            })
-            .catch(err => console.log(err));
-    };
-
     render() {
 
-        return <Form onSubmit={this.props.user ? this.submitEdit : this.submitNew}>
-            {this.state.isPasswordEditing &&
+        return <Form onSubmit={this.submitNew}>
             <Fragment>
-                <Button onClick={() => this.changeEditingFlag()}>Change Accout Info</Button>
-
                 <FormGroup>
-                    <Label for="password">New Password:</Label>
-                    <Input type="text" name="password" onChange={(e) => {
-                        this.onChange(e);
-                        this.checkPassword(e)
-                    }}
-                           valid={this.state.validate.passwordState === 'has-success'}
-                           invalid={this.state.validate.passwordState === 'has-danger'}/>
-                    <FormFeedback valid>
-                        Great! Password is valid
-                    </FormFeedback>
-                    <FormFeedback>
-                        Password is less then 3 characters.
-                        Add some more characters!
-                    </FormFeedback>
-                </FormGroup>
-                <button>Save</button>
-
-            </Fragment>
-
-            }
-            {!this.state.isPasswordEditing &&
-            <Fragment>
-                <Button onClick={() => this.changeEditingFlag()}>Change Password</Button>
-                <FormGroup>
-
                     <Label for="username">Username:</Label>
                     <Input type="text" name="username" onChange={(e) => {
                         this.onChange(e);
@@ -226,16 +162,32 @@ class RegistrationForm extends React.Component {
                            value={this.state.name === null ? '' : this.state.name}/>
                 </FormGroup>
 
-                { JSON.parse(sessionStorage.getItem("authorizedUser")).isAdmin && <FormGroup>
+                <FormGroup>
                     <Label for="name">IsAdmin:</Label>
                     <Input type="checkbox" name="isAdmin" onChange={this.handleCheckbox}
                            checked={this.state.isAdmin}/>
                 </FormGroup>
-                }
 
-                <button disabled={!this.state.enableButton}>Save</button>
             </Fragment>
-            }
+
+            <FormGroup>
+                <Label for="password">New Password:</Label>
+                <Input type="text" name="password" onChange={(e) => {
+                    this.onChange(e);
+                    this.checkPassword(e)
+                }}
+                        valid={this.state.validate.passwordState === 'has-success'}
+                        invalid={this.state.validate.passwordState === 'has-danger'}/>
+                <FormFeedback valid>
+                    Great! Password is valid
+                </FormFeedback>
+                <FormFeedback>
+                    Password is less then 3 characters.
+                    Add some more characters!
+                </FormFeedback>
+            </FormGroup>
+            <button disabled={!this.state.enableButton}>Save</button>
+
 
         </Form>;
 
@@ -243,4 +195,4 @@ class RegistrationForm extends React.Component {
 
 }
 
-export default RegistrationForm;
+export default AddUserForm;

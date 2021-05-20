@@ -34,7 +34,7 @@ class App extends Component {
           <AppHeader />
             <Switch>
                 {/*Private routes are for admin user and protected for logged users*/}
-                <PrivateRoute path="/users" roles={[Role.Admin]} component={Users} />
+                <PrivateRoute path="/users" roles={[Role.Admin]} component={Users}/>
                 <ProtectedRoute path="/account" component={() => <Account authUser={this.state.currentUser}/>} />
                 {/*Using a callback function to set global credentials if login is successfully and clear them if logout
                 Also using sessionStorage for individual cases*/}
