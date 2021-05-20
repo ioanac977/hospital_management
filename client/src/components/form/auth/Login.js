@@ -116,20 +116,10 @@ class Login extends Component {
                                     id="examplePassword"
                                     placeholder="********"
                                     value={password}
-                                    valid={this.state.validate.passwordState === 'has-success'}
-                                    invalid={this.state.validate.passwordState === 'has-danger'}
                                     onChange={(e) => {
-                                        this.validateInput(e, 'passwordState');
                                         this.handleChange(e)
                                     }}
                                 />
-                                <FormFeedback valid>
-                                    Great! Password is valid
-                                </FormFeedback>
-                                <FormFeedback>
-                                    Uh oh! Looks like there is an issue with your password.
-                                    Make sure that password has more than 3 characters!
-                                </FormFeedback>
                             </FormGroup>
                         </Col>
                         <Button>Submit</Button>
