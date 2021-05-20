@@ -37,17 +37,18 @@ class PatientsList extends React.Component {
             hospitalFilter: '',
         })
     }
-formatDate(unformatedDate){
-        const date = new Date(unformatedDate);
-    const dateTimeFormat = new Intl.DateTimeFormat('en', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-    return dateTimeFormat.format(date);}
+
+    formatDate(unformatedDate){
+            const date = new Date(unformatedDate);
+        const dateTimeFormat = new Intl.DateTimeFormat('en', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+        return dateTimeFormat.format(date);}
 
     render() {
-        console.log("sessionStorage on login:", sessionStorage.getItem('token'));
+        //filter by hospital
         let items = this.props.items
             .filter(d => this.state.nameFilter === '' || (d.name.toLowerCase()).includes((this.state.nameFilter).toLowerCase()));
         items = items

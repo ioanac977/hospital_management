@@ -50,10 +50,6 @@ namespace HospitalManagement.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody]UserCredentials credentials)
         {
-            if (!ModelState.IsValid || credentials == null)
-            {
-                return new BadRequestObjectResult(new { Message = "Login failed" });
-            }
 
             User authUser = authService.getAuthUser(credentials.Username);
            

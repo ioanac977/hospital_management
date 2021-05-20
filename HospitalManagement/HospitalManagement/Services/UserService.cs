@@ -78,6 +78,24 @@ namespace HospitalManagement.Services
             // password will be concatenated with salt using ':'
             return $"{hashed}:{Convert.ToBase64String(salt)}";
         }
+
+        public async Task<User> editUserAsync(UserInfo userInfo,int id)
+        {
+            User user = await GetUser(id);
+            if (userInfo?.Password != null)
+            {
+                user.Password = hashPassword(userInfo.Password, null, false);
+            }
+            else
+            {
+                user.Name = userInfo.Name;
+                user.Username = userInfo.Username;
+                user.IsAdmin = userInfo.IsAdmin;
+
+            }
+            return user;
+        }
+
         public bool VerifyPassword(string hashedPasswordWithSalt, string passwordToCheck)
         {
             // retrieve both salt and password from 'hashedPasswordWithSalt'

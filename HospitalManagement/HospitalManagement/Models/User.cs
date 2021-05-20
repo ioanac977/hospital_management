@@ -19,7 +19,6 @@ namespace HospitalManagement.Models
         public string Password { get; set; }
 
         [Required]
-        [MinLength(3)]
         public string Name { get; set; }
 
         public bool IsAdmin { get; set; }

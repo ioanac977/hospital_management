@@ -146,7 +146,6 @@ class RegistrationForm extends React.Component {
     };
 
     submitEdit = e => {
-        console.log("props are:", this.props);
         e.preventDefault();
         let requestBody = {
             username: this.state.username,

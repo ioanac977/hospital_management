@@ -55,40 +55,6 @@ namespace HospitalManagement.Controllers
             return Ok(user);
         }
 
-        //// PUT: api/Users/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutUser([FromRoute] int id, [FromBody] User user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    user.Id = id;
-        //    var initialPassword = user.Password;
-        //    user.Password = userService.hashPassword(user.Password,null,false);
-
-        //    userService.SetEntityState(user, EntityState.Modified);
-
-        //    try
-        //    {
-        //        await userService.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!userService.UserExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
         [HttpPut("UserInfo/{id}")]
         public async Task<IActionResult> EditUserInfo([FromRoute] int id, [FromBody] UserInfo userInfo)
         {
@@ -96,20 +62,9 @@ namespace HospitalManagement.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
-            User user = await userService.GetUser(id);
-            if (userInfo?.Password!=null)
-            {
-                user.Password=userService.hashPassword(userInfo.Password, null, false);
-            }
-            else
-            {
-                user.Name = userInfo.Name;
-                user.Username = userInfo.Username;
-                user.IsAdmin = userInfo.IsAdmin;
 
-            }
-               
+            User user = await userService.editUserAsync(userInfo,id);
+            
             userService.SetEntityState(user, EntityState.Modified);
 
             try

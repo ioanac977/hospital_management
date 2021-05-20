@@ -12,7 +12,7 @@ class AppHeader extends Component { // 3
         })
     }
 
-    render() { // 7
+    render() {
         let authUser = JSON.parse(sessionStorage.getItem("authorizedUser"));
         return <Navbar color="dark" dark expand="md">
             <NavbarBrand href="/">
@@ -36,9 +36,7 @@ class AppHeader extends Component { // 3
                         <NavItem>
                             <Link className="Link" to="/account">Account</Link>
                         </NavItem>
-                        {/*<NavItem>*/}
-                        {/*    <Link to="/login">Login</Link>*/}
-                        {/*</NavItem>*/}
+
                         <NavItem>
                             <Link className="Link" to="/logout">Logout</Link>
                         </NavItem>

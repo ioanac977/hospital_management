@@ -11,10 +11,7 @@ class Logout extends Component {
         this.logout();
     }
 
-
     logout = () => {
-        sessionStorage.removeItem('token');
-        console.log("sessionStorage before logout:", sessionStorage.getItem('authorizedUser'));
         sessionStorage.removeItem('authorizedUser');
         console.log("sessionStorage on logout:", sessionStorage.getItem('authorizedUser'));
         this.setState({navigate: true});

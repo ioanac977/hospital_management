@@ -24,6 +24,7 @@ class Users extends Component {
             items: [...previous.items, user]
         }));
     };
+    //Update users list after adding a new one
     updateState = (id) => {
         this.getItens();
     };

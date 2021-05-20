@@ -14,7 +14,7 @@ class Account extends Component {
     }
 
     getItem = () => {
-        console.log("this.props", this.props);
+
         let id = this.state.id;
         if (this.props.authUser.id !== undefined)
             id = this.props.authUser.id;
@@ -35,7 +35,7 @@ class Account extends Component {
     };
 
     render() {
-        console.log('account render', this.props);
+
         const item = this.state.item;
 
         return <Table striped>
