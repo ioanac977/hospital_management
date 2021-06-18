@@ -21,6 +21,7 @@ class AppHeader extends Component { // 3
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
+                {/*auth user != null is not the most secure, I should've use the global state for authUser*/}
                 <Nav className="ml-auto" navbar>
                     {authUser != null &&
                     <Fragment>

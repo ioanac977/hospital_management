@@ -115,7 +115,7 @@ namespace HospitalManagement.Controllers
             {
                 return NotFound();
             }
-
+            
             userService.DeleteUser(user);
             await userService.SaveChangesAsync();
 

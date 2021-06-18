@@ -12,6 +12,7 @@ RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS runtime
 WORKDIR /app
+# we are using multi-stage containers to make use of the previous image
 COPY --from=build /app/out ./
 EXPOSE 4040
 ENV ASPNETCORE_URLS=http://*:4040

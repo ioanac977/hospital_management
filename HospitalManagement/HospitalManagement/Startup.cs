@@ -1,12 +1,15 @@
 ﻿using System;
+using System.IO;
 using HospitalManagement.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace HospitalManagement
 {
@@ -69,6 +72,10 @@ namespace HospitalManagement
             app.UseAuthentication();
 
 
+            app.UseSpa(spa =>
+            {
+                spa.Options.DefaultPage = "/index.html";
+            });
             app.UseCors("ReactPolicy");
         }
     }

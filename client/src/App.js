@@ -45,12 +45,12 @@ class App extends Component {
                     <Logout handleLogout={this.setGlobalCredentials}/>
                 </Route>
                 <ProtectedRoute path="/patients" component={Patients}/>
-                <Route path="/">
-                    <Home/>
-                </Route>
+                <Route path="/" component={Home}/>
+
             </Switch>
           <AppFooter />
         </Fragment>;
+
       </Router>
 
   }

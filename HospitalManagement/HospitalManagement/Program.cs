@@ -31,7 +31,7 @@ namespace HospitalManagement
             {
                 var services = scope.ServiceProvider;
                 try
-                {
+                {   //Get a DB context instance from the dependency injection container
                     var context = services.GetRequiredService<HospitalContext>();
                     DbInitializer.Initialize(context);
                 }

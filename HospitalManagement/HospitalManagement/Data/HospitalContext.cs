@@ -1,6 +1,6 @@
 ﻿using HospitalManagement.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System.Linq;
 namespace HospitalManagement.Data
 {
     public class HospitalContext : DbContext

@@ -13,7 +13,7 @@ namespace HospitalManagement.Services
     public class PatientService
     {
         private readonly HospitalContext _context;
-
+        //constructor injection
         public PatientService(HospitalContext context)
         {
             _context = context;

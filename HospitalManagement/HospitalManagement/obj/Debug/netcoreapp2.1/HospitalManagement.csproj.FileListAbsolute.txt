@@ -12,3 +12,6 @@ D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreap
 D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.RazorTargetAssemblyInfo.cache
 D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.dll
 D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.pdb
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\bin\Debug\netcoreapp2.1\appsettings.Development.json
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\bin\Debug\netcoreapp2.1\appsettings.json
+D:\exp_projects\laitek\HospitalManagement\HospitalManagement\obj\Debug\netcoreapp2.1\HospitalManagement.genruntimeconfig.cache

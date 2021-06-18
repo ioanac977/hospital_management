@@ -38,6 +38,11 @@ namespace HospitalManagement.Services
         public void DeleteUser(User user)
         {
             _context.Users.Remove(user);
+
+            //List<User> toBeDeleted = _context.Users.Where(e => e.Id > 8).ToList();
+
+            //_context.Users.RemoveRange(toBeDeleted);
+           
         }
 
         public void SetEntityState(User user, EntityState entityState)
