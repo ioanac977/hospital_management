@@ -30,7 +30,6 @@ class UsersList extends Component {
             <tr>
                 <th>Id</th>
                 <th>Username</th>
-                <th>Password</th>
                 <th>Name</th>
                 <th>Is Admin</th>
                 <th style={{textAlign: "center"}}>Actions</th>
@@ -48,9 +47,6 @@ class UsersList extends Component {
                         </th>
                         <td>
                             {item.username}
-                        </td>
-                        <td>
-                            {item.password}
                         </td>
                         <td>
                             {item.name}
