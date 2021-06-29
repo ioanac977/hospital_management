@@ -12,10 +12,10 @@ class Logout extends Component {
     }
 
     logout = () => {
-        sessionStorage.removeItem('authorizedUser');
-        console.log("sessionStorage on logout:", sessionStorage.getItem('authorizedUser'));
+        // sessionStorage.removeItem('authorizedUser');
+        // console.log("sessionStorage on logout:", sessionStorage.getItem('authorizedUser'));
         this.setState({navigate: true});
-        this.props.handleLogout({});
+        this.props.handleLogout(null);
 
         fetch(LOGOUT_API_URL, {
             method: 'post',
@@ -28,8 +28,6 @@ class Logout extends Component {
             .then(res => res.json())
             .then(user => {
                 console.log("Successfully logout");
-
-
             })
 
             .catch(err => console.log(err));

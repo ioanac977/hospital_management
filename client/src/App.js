@@ -18,19 +18,22 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentUser: {}
+            currentUser: undefined
         }
     }
     componentDidMount() {
         this.getAuthUser();
     }
 
-    getAuthUser(){
+    getAuthUser = () => {
         fetch(`${AUTH_USER_INFO}`)
             .then(res => res.json())
-            .then(res => this.setState({currentUser: res}))
-            .catch(err => console.log(err));
+            .then(res => this.setGlobalCredentials(res))
+            .catch(err => {
+                this.setGlobalCredentials(null)
+            });
     }
+
     setGlobalCredentials = (authUser) => {
             this.setState({
                 currentUser: authUser
@@ -40,13 +43,13 @@ class App extends Component {
 
   render() {
 
-    return <Router>
+    return (this.state.currentUser !== undefined && <Router>
         <Fragment>
           <AppHeader authUser={this.state.currentUser}/>
             <Switch>
                 {/*Private routes are for admin user and protected for logged users*/}
-                <PrivateRoute path="/users" roles={[Role.Admin]} component={Users}/>
-                <ProtectedRoute path="/account" component={() => <Account authUser={this.state.currentUser}/>} />
+                <PrivateRoute path="/users" authUser={this.state.currentUser} roles={[Role.Admin]} component={Users}/>
+                <ProtectedRoute path="/account"  authUser={this.state.currentUser} component={Account} />
                 {/*Using a callback function to set global credentials if login is successfully and clear them if logout
                 Also using sessionStorage for individual cases*/}
                 <Route path="/login" >
@@ -55,14 +58,14 @@ class App extends Component {
                 <Route path="/logout">
                     <Logout handleLogout={this.setGlobalCredentials}/>
                 </Route>
-                <ProtectedRoute path="/patients" component={Patients}/>
-                <Route path="/" component={Home}/>
+                <ProtectedRoute path="/patients" authUser={this.state.currentUser} component= {Patients}/>
+                <ProtectedRoute path="/" authUser={this.state.currentUser} component={Home}/>
 
             </Switch>
           <AppFooter />
         </Fragment>;
 
-      </Router>
+      </Router>);
 
   }
 }

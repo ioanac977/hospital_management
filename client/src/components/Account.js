@@ -16,14 +16,16 @@ class Account extends Component {
     getItem = () => {
 
         let id = this.state.id;
-        if (this.props.authUser.id !== undefined)
-            id = this.props.authUser.id;
-        else {
-            let authUserFromStorage = JSON.parse(sessionStorage.getItem("authorizedUser"));
-            if (authUserFromStorage != null) {
-                id = authUserFromStorage.id;
-            }
+        if(this.props.authUser) {
+            if (this.props.authUser.id !== undefined)
+                id = this.props.authUser.id;
         }
+        // else {
+        //     let authUserFromStorage = JSON.parse(sessionStorage.getItem("authorizedUser"));
+        //     if (authUserFromStorage != null) {
+        //         id = authUserFromStorage.id;
+        //     }
+        // }
 
         fetch(`${USERS_API_URL}/${id}`)
             .then(res => res.json())
