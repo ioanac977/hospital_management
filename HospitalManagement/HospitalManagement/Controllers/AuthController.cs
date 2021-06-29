@@ -61,7 +61,11 @@ namespace HospitalManagement.Controllers
             if (!isPasswordValid)
                 return new BadRequestObjectResult(new { Message = "Login failed" });
 
-            var userClaim = new List<Claim> { new Claim("IsAdmin", authUser.IsAdmin.ToString())};
+            var userClaim = new List<Claim> {
+                new Claim("IsAdmin", authUser.IsAdmin.ToString()),
+                new Claim("UserName", authUser.Username),
+                new Claim("Id", authUser.Id.ToString()),
+            };
           
 
             var claimsIdentity = new ClaimsIdentity(

@@ -35,6 +35,16 @@ namespace HospitalManagement.Controllers
         {
             return userService.GetUsers();
         }
+        //api/auth/userInfo
+        //get user details {username, id}
+        [HttpGet]
+        [Route("AuthUserInfo")]
+        public User GetAuthUserInfo()
+        {
+
+            User authUser = userService.getAuthUser(HttpContext.User);
+            return authUser;
+        }
 
         // GET: api/Users/5
         [HttpGet("{id}")]

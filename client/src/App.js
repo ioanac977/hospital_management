@@ -12,6 +12,7 @@ import {Role} from "./_helpers/Role";
 import Patients from "./components/Patients";
 import "./App.css";
 import {ProtectedRoute} from "./components/ProtectedRoute";
+import {AUTH_USER_INFO, EDIT_USER_INFO} from "./constants";
 
 class App extends Component {
     constructor(props) {
@@ -19,6 +20,16 @@ class App extends Component {
         this.state = {
             currentUser: {}
         }
+    }
+    componentDidMount() {
+        this.getAuthUser();
+    }
+
+    getAuthUser(){
+        fetch(`${AUTH_USER_INFO}`)
+            .then(res => res.json())
+            .then(res => this.setState({currentUser: res}))
+            .catch(err => console.log(err));
     }
     setGlobalCredentials = (authUser) => {
             this.setState({
@@ -31,7 +42,7 @@ class App extends Component {
 
     return <Router>
         <Fragment>
-          <AppHeader />
+          <AppHeader authUser={this.state.currentUser}/>
             <Switch>
                 {/*Private routes are for admin user and protected for logged users*/}
                 <PrivateRoute path="/users" roles={[Role.Admin]} component={Users}/>

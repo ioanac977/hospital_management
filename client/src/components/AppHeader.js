@@ -13,7 +13,8 @@ class AppHeader extends Component { // 3
     }
 
     render() {
-        let authUser = JSON.parse(sessionStorage.getItem("authorizedUser"));
+        // let authUser = JSON.parse(sessionStorage.getItem("authorizedUser"));
+        let authUser = this.props.authUser;
         return <Navbar color="dark" dark expand="md">
             <NavbarBrand href="/">
                 <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"

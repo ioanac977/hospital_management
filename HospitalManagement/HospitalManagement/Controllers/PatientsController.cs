@@ -32,6 +32,8 @@ namespace HospitalManagement.Controllers
         [HttpGet]
         public IEnumerable<Patient> GetPatients()
         {
+            var user = HttpContext.User;
+            
             return  patientService.GetPatients();
         }
 

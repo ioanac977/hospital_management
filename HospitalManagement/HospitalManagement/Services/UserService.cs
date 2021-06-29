@@ -119,5 +119,11 @@ namespace HospitalManagement.Services
             }
             return false;
         }
+
+        public User getAuthUser(System.Security.Claims.ClaimsPrincipal user)
+        {
+            var loggedUser = user.Claims.ToList();
+            return _context.Users.Find(Int32.Parse(loggedUser[2].Value));
+        }
     }
 }

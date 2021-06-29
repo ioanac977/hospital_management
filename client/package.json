@@ -15,8 +15,8 @@
     "reactstrap": "latest",
     "web-vitals": "^1.1.2"
   },
-  "proxy2": "https://localhost:44392/",
-  "proxy": "https://localhost:5001/",
+  "proxy": "https://localhost:44392/",
+  "proxy2": "https://localhost:5001/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
