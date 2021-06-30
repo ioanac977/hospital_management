@@ -97,7 +97,7 @@ class EditUserForm extends React.Component {
 
         //if logged user is NOT admin then we need to make requests to check if new username already exist in users table
         if (userList == null) {
-            if(currentUserValue.localeCompare(JSON.parse(sessionStorage.getItem("authorizedUser")).username)!== 0)
+            // if(currentUserValue.localeCompare(JSON.parse(sessionStorage.getItem("authorizedUser")).username)!== 0)
                  this.makeCheckRequest(currentUserValue);
 
         }//if logged user is admin then he has access to usersList -> we are making a check based on data that is already available
@@ -221,7 +221,7 @@ class EditUserForm extends React.Component {
                            value={this.state.name === null ? '' : this.state.name}/>
                 </FormGroup>
 
-                { JSON.parse(sessionStorage.getItem("authorizedUser")).isAdmin && <FormGroup>
+                { this.props.user.isAdmin && <FormGroup>
                     <Label for="name">IsAdmin:</Label>
                     <Input type="checkbox" name="isAdmin" onChange={this.handleCheckbox}
                            checked={this.state.isAdmin}/>

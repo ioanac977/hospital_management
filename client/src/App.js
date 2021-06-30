@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
 import Home from './components/Home';
-import {Link, Route, BrowserRouter as Router , Switch} from "react-router-dom";
+import {Link, Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
 import Users from "./components/Users";
 import Account from "./components/Account";
 import Login from "./components/form/auth/Login";
@@ -50,10 +50,12 @@ class App extends Component {
                 {/*Private routes are for admin user and protected for logged users*/}
                 <PrivateRoute path="/users" authUser={this.state.currentUser} roles={[Role.Admin]} component={Users}/>
                 <ProtectedRoute path="/account"  authUser={this.state.currentUser} component={Account} />
-                {/*Using a callback function to set global credentials if login is successfully and clear them if logout
-                Also using sessionStorage for individual cases*/}
-                <Route path="/login" >
-                    <Login handleLogin={this.setGlobalCredentials}/>
+                {/*Using a callback function to set global credentials if login is successfully and clear them if logout*/}
+                <Route path="/login">
+                    {this.state.currentUser &&
+                    <Redirect to="/" /> ||
+                    <Login authUser={this.state.currentUser} handleLogin={this.setGlobalCredentials}/>}}
+
                 </Route>
                 <Route path="/logout">
                     <Logout handleLogout={this.setGlobalCredentials}/>

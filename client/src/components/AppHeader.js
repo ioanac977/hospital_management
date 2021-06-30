@@ -13,7 +13,6 @@ class AppHeader extends Component { // 3
     }
 
     render() {
-        // let authUser = JSON.parse(sessionStorage.getItem("authorizedUser"));
         let authUser = this.props.authUser;
         return <Navbar color="dark" dark expand="md">
             <NavbarBrand href="/">

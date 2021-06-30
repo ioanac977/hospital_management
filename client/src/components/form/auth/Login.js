@@ -13,8 +13,6 @@ class Login extends Component {
                 usernameState: '',
                 passwordState: '',
             },
-
-            redirect: false,
             loginError: false,
             authUser: {}
         };
@@ -59,7 +57,6 @@ class Login extends Component {
             .then(res => res.json())
             .then(authUser => {
                     if (authUser.username) {
-                        // sessionStorage.setItem("authorizedUser", JSON.stringify(authUser))
                         this.setState({redirect: true});
                     } else {
                         this.setState({loginError: true});
@@ -76,7 +73,6 @@ class Login extends Component {
 
     render() {
         const {username, password} = this.state;
-        if (!this.state.redirect) {
             return (
                 <Container className="App">
                     <h2>Sign In</h2>
@@ -131,9 +127,6 @@ class Login extends Component {
                     </Form>
                 </Container>
             );
-        } else {
-            return (<Redirect to={'/'}/>)
-        }
     }
 }
 
